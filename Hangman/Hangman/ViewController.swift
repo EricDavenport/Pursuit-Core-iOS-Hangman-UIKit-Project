@@ -19,7 +19,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var hangManImage: UIImageView!
     
     var hiddenWord: [Character] = []
-    var hiddenW2: String = ""
     var misses: Int = 0
    
     
@@ -71,40 +70,52 @@ class ViewController: UIViewController {
     // take the word written and place it as underscores
     
     func underScoreReplacement()  {
-        //var hiddenWord: [Character] = Array(repeating: "*", count: inputWord.text!.count)
         //print(hiddenWord)
         
-        var hiddenWordString = inputWord.text?.components(separatedBy: "")
+        var hiddenWord: [String] = Array(repeating: "_ ", count: inputWord.text!.count)
+
+        blankSpaces.text = hiddenWord.joined()
         
-        for each in hiddenWordString! {
-            for _ in each {
-            hiddenW2.append("_ ")
-        }
-        }
-       
-        blankSpaces.text = hiddenW2
-        print(inputWord.text!)
+        print(hiddenWord)
        // return hiddenWord
     }
     
     
     func replaceWithLetter() {
-//        var hiddenWordIndex = [Int]()
-//        for (index, _) in hiddenWord {
+        var hiddenWordIndex = [Int]()
+//        if letterGuess.text != nil {
+//        for (index, char) in hiddenWord.enumerated() {
 //            if hiddenWordIndex.contains(index) {
-//                hiddenWord[index] =
+//                hiddenWord[index] = char
+//            }
 //            }
 //        }
         
         
+        
+        
+      
 //
-//        for (index, _) in hiddenWord.enumerated() {
-//            if hiddenWordIndex.contains(index) {
-//                hiddenWord[index] = playerGuess // _ _ _ _ _  => _ p p _ _
+//
+////
+////        for (index, _) in hiddenWord.enumerated() {
+////            if hiddenWordIndex.contains(index) {
+////                hiddenWord[index] = playerGuess // _ _ _ _ _  => _ p p _ _
+////            }
+//        for (index, char) in inputWord.text!.enumerated() {
+//            if letterGuess!.text == String(char) {
+//                hiddenWordIndex.append(index)
 //            }
-
-        
-        
+//        }
+//
+        for (index, _) in hiddenWord.enumerated() {
+            if hiddenWordIndex.contains(index) {
+                hiddenWord[index] = Character(letterGuess!.text!) // _ _ _ _ _  => _ p p _ _
+            }
+        }
+        print(String(hiddenWord))
+        blankSpaces.text = String(hiddenWord)
+//
         
     }
     
@@ -134,9 +145,8 @@ extension ViewController: UITextFieldDelegate {
         resignFirstResponder()
         underScoreReplacement()
         
-        if let textfield = letterGuess {
-        printHangman()
-        }
+        
+    
     }
      return true
 }
